@@ -25,18 +25,17 @@ gulp.task('js:libs', function() {
         .pipe(gulp.dest('./web/www/js/'));
 });
 
-// task to browserify `mypackage`
-gulp.task('js:browserify-mypackage', function() {
+// task to browserify `worker`
+gulp.task('js:worker', function() {
     var b = browserify({
-        entries: './mypackage/index.js',
-        debug: true,
-        standalone: 'mypackage'
+        entries: './mypackage/worker.js',
+        debug: true
     });
-
+    
     return b.bundle()
-        .pipe(source('mypackage.js'))
-        .pipe(buffer())
-        .pipe(gulp.dest('./web/www/js/'));
+      .pipe(source('worker.js'))
+      .pipe(buffer())
+      .pipe(gulp.dest('./web/www/js/'));
 });
 
 // task to concat the angular app
@@ -68,7 +67,7 @@ gulp.task('js:app:livereload', ['js:app'], function() {
 });
 
 // task to trigger rebuild and then livereload
-gulp.task('js:browserify-lib:livereload', ['js:browserify-mypackage'], function() {
+gulp.task('js:browserify-lib:livereload', ['js:worker'], function() {
     livereload.reload();
 });
 
@@ -77,5 +76,5 @@ gulp.task('livereload', function() {
     livereload.reload();
 });
 
-gulp.task('js', ['js:libs', 'js:browserify-mypackage', 'js:app']);
+gulp.task('js', ['js:libs', 'js:worker', 'js:app']);
 gulp.task('default', ['js']);
