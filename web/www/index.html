@@ -44,8 +44,37 @@
 
     </style>
 </head>
-<body ng-app="myApp">
-<div class="container" ng-controller="MyAppMainController">
+<body ng-app="AppModule">
+<div class="container" ng-controller="AppMainController">
+    <section>
+        textarea to demonstrate that the browser is blocking:
+        <textarea style="width: 100%; height: 50px; margin-bottom: 10px;"></textarea>
+    </section>
+    <section>
+        click the button to start the task:
+        <button ng-click="gogo()">gogo</button>
+    </section>
+
+    <section>
+        pingbar to demonstrate the browser is blocking:
+        <div class="pingbar">
+            <div ng-style="{'left': ping + '%'}" class="pingbar-inner"></div>
+        </div>
+    </section>
+
+    <section ng-show="working">
+        progress bar: <br />
+        <div class="progressbar">
+            <div ng-style="{'width': progress + '%'}" class="progressbar-inner"></div>
+        </div>
+    </section>
+
+    <section ng-show="result">
+        RESULT: {{ result }}
+    </section>
+</div>
+
+<div class="container" ng-controller="AppMainController">
     <section>
         textarea to demonstrate that the browser is blocking:
         <textarea style="width: 100%; height: 50px; margin-bottom: 10px;"></textarea>
@@ -75,7 +104,6 @@
 </div>
 
 <script src="js/libs.js"></script>
-<script src="js/mypackage.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
